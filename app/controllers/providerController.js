@@ -6,6 +6,7 @@ const {
 	formatValidationError,
 	adaptRequest,
 	logger,
+	mapQueryFilters,
 	StatusCodes,
 	prepareLoadData,
 } = require('../lib/utils');
@@ -85,7 +86,33 @@ const loadData = async (req, res) => {
 	});
 }
 
+const filterData = async (req, res) => {
+	const {pathParams: {providerId}, queryParams: queryFilters, method, path} = adaptRequest(req);
+	const queryObject = mapQueryFilters(queryFilters);
+
+	if (providerId) {
+		queryObject.providerId = Number(providerId);
+	}
+
+	const filterResult = await ProviderData.find(queryObject).select(['name', 'age', 'timestamp', '-_id']);
+	const resultLength = filterResult.length;
+
+	if (!resultLength) {
+		logger.info(`No result found for the provided filters - ${method} - ${path}`);
+		throw new NotFoundError('No result found for the provided filters');
+	}
+
+	const result = (resultLength === 1) ? filterResult[0] : filterResult;
+
+	logger.info(`Filter results for provider: ${providerId} retrieved`)
+	return res.status(StatusCodes.OK).json({
+		message: 'Successfully retrieved results',
+		data: result
+	});
+}
+
 module.exports = {
 	loadData,
+	filterData,
 	createSpecification
 }
