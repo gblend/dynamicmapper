@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - APP_PORT=$APP_PORT
+        - APP_NAME=$APP_NAME
+    restart: unless-stopped
+    container_name: ${APP_NAME}Api
+    networks:
+      - ${APP_NAME}
+    tty: true
+    # Expose the internal 8080 port, but do not specify host port mapping. Docker will map it as it pleases and
+    # prevent clashes to existing ports.
+    ports:
+      - ${APP_PORT}
+
+networks:
+  ${APP_NAME}:
+    driver: bridge
