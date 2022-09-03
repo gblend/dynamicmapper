@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const config = {
     app: {
-        port: process.env.APP_PORT || 3000,
+        port: process.env.PORT || 3000,
         name: process.env.APP_NAME || 'dynamicMapper',
         env: process.env.NODE_ENV,
         baseUrl: (process.env.NODE_ENV === 'production') ? process.env.BASE_URL_PROD : process.env.BASE_URL_DEV
