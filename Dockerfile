@@ -21,5 +21,3 @@ EXPOSE  3000
 EXPOSE  8585
 
 ENTRYPOINT ["node", "server.js"]
-
-CMD ["pm2-docker", "ecosystem.config.js"]
