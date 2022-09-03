@@ -58,3 +58,4 @@ Test coverage was carried out but not completed due to time.
 ### API Documentation
 [Postman Collection](https://www.getpostman.com/collections/f0d2d13b0b9f70d05309)
 
+[Hosted app url](https://api-dynamicmapper.herokuapp.com/api/v1/status)
