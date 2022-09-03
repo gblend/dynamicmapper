@@ -66,7 +66,9 @@ const loadData = async (req, res) => {
 	const {error} = providerDataValidator.validateDto(payload, providerSpecification.fields);
 	if (error) {
 		return res.status(StatusCodes.BAD_REQUEST).json({
-			data: {errors: formatValidationError(error)}
+			data: {errors: formatValidationError(error),
+				allowedFields: providerSpecification.fields.join(',')
+			}
 		});
 	}
 
