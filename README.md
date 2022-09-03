@@ -2,7 +2,7 @@
 
 # DynamicMapper
 
-### A web service that supports creation of data specification for an external data, retrieval of data for providers and more.
+### A web service that supports creation of data specification for an external data, retrieval of data for providers, provider data management and more.
 
 
 ### Assumptions
