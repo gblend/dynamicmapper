@@ -1,7 +1,7 @@
 {
   "name": "dynamicmapper-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "dynamic data mapper service",
   "repository": {
     "type": "git",
     "url": "git://github.com/gblend/dynamicmapper.git"
@@ -14,8 +14,8 @@
     "pm2": "NODE_PATH=. pm2 delete ecosystem.config.js && pm2 start ecosystem.config.js",
     "stop": "NODE_PATH=. pm2 stop ecosystem.config.js",
     "test": "NODE_ENV=test jest --coverage tests/*",
-    "unit": "jest --coverage tests/unit --watchAll",
-    "integration": "NODE_ENV=test jest --coverage tests/integration* --watchAll"
+    "unit": "jest --coverage tests/unit",
+    "integration": "NODE_ENV=test jest --coverage tests/integration*"
   },
   "author": "gabrielilochi@gmail.com",
   "license": "ISC",
