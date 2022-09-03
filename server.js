@@ -3,6 +3,7 @@
 require('express-async-errors');
 const {
 	morgan,
+	providerRouter,
 	errorHandlerMiddleware,
 	notFoundMiddleware,
 	connectDB,
@@ -31,6 +32,7 @@ app.use(cors());
 
 app.use(resInterceptor);
 app.use('/api/v1/status', (req, res) => appStatus.compile(req, res));
+app.use('/api/v1/provider', providerRouter);
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 

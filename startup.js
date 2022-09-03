@@ -14,6 +14,7 @@ const {logger, appStatus} = require('./app/lib/utils');
 const {handle} = require('./app/middleware/handle_event');
 const notFoundMiddleware = require('./app/middleware/not_found');
 const resInterceptor = require('./app/middleware/res_interceptor');
+const providerRouter = require('./app/routes/provider_routes');
 const errorHandlerMiddleware = require('./app/middleware/error_handler');
 const app = express();
 
@@ -25,6 +26,7 @@ const apiRateLimiter = rateLimit({
 
 module.exports = {
 	morgan,
+	providerRouter,
 	errorHandlerMiddleware,
 	notFoundMiddleware,
 	connectDB,
