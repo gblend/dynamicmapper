@@ -90,16 +90,24 @@ const filterData = async (req, res) => {
 	const {pathParams: {providerId}, queryParams: queryFilters, method, path} = adaptRequest(req);
 	const queryObject = mapQueryFilters(queryFilters);
 
+	const selectFields = Object.keys(queryObject);
 	if (providerId) {
 		queryObject.providerId = Number(providerId);
 	}
 
-	const filterResult = await ProviderData.find(queryObject).select(['name', 'age', 'timestamp', '-_id']);
+	const filterQuery = ProviderData.find(queryObject);
+
+	if (selectFields.length) {
+		selectFields.push('-_id');
+		filterQuery.select(selectFields);
+	}
+
+	const filterResult = await filterQuery;
 	const resultLength = filterResult.length;
 
 	if (!resultLength) {
 		logger.info(`No result found for the provided filters - ${method} - ${path}`);
-		throw new NotFoundError('No result found for the provided filters');
+		throw new NotFoundError('No result found');
 	}
 
 	const result = (resultLength === 1) ? filterResult[0] : filterResult;
