@@ -15,14 +15,14 @@ describe('App', () => {
 		expect(app.locals.settings.env).toEqual('test');
 	});
 
-	it('should return app status with registered routes', (done) => {
+	it('should return app status', (done) => {
 		request.get('/api/v1/status')
 			.set('Content-Type', 'application/json')
 			.expect('Content-Type', 'application/json; charset=utf-8')
 			.expect((response) => {
 
 				const appStatusSchema = Joi.object({
-					status: Joi.string().required(),
+					status: Joi.string(),
 					message: Joi.string().required(),
 					data: Joi.object({
 						info: Joi.object({
